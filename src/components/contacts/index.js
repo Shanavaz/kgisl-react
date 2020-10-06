@@ -25,10 +25,10 @@ import Menu from '@material-ui/core/Menu';
 import {
     Button
 } from '@material-ui/core';
+import Snackbar from '@material-ui/core/Snackbar';
 
 
 class Contacts extends React.Component {
-
 
     constructor(props) {
         super(props)
@@ -42,8 +42,6 @@ class Contacts extends React.Component {
             deleteDialog: false,
         }
     }
-
-
 
     componentWillMount() {
 
@@ -60,56 +58,6 @@ class Contacts extends React.Component {
             })
 
     }
-
-    handleDialogClose = () => {
-        console.log(this.state.openModal)
-        this.setState({
-            openModal: false
-        })
-    };
-
-    handleDialogOpen = (event, row) => {
-        console.log(row)
-        this.setState({
-            open: !this.state.open
-        })
-    };
-
-    handleDeleteDialogToggle = (event) => {
-        this.setState({
-            deleteDialog: !this.state.deleteDialog
-        })
-    };
-
-    handleMenuOpen = (event) => {
-        console.log(event)
-        console.log(this.state.isMenuOpen)
-        this.setState({
-            anchorEl: event.currentTarget,
-            isMenuOpen: !this.state.isMenuOpen
-        })
-    };
-
-    handleMenuClose = (event, row) => {
-        this.setState({
-            isMenuOpen: !this.state.isMenuOpen,
-            anchorEl: null
-        })
-    };
-
-    handleUpdateContact = (event, row) => {
-        this.setState({
-            isMenuOpen: !this.state.isMenuOpen,
-            anchorEl: null
-        })
-    };
-
-    handleDeleteContact = (event, row) => {
-        this.setState({
-            deleteDialog: false,
-            anchorEl: null
-        })
-    };
 
     searchName = (event) => {
         this.setState({
@@ -133,6 +81,12 @@ class Contacts extends React.Component {
             })
         }
     };
+
+    updateAndGetData = (data) => {
+        this.setState({
+            data: data
+        })
+    }
 
     render() {
 
@@ -161,70 +115,20 @@ class Contacts extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {/* {this.state.data.map((row, index) => {
+                            {this.state.data.map((row, index) => {
                                 return (
                                     <ContactRow
                                         key={index}
                                         row={row}
-                                        handleOpen={this.handleOpen}
+                                        updateAndGetData={this.updateAndGetData}
+                                    // handleOpen={this.handleOpen}
                                     />
                                 );
                             })
-                            } */}
-                            {this.state.data.map((row) => (
-                                <TableRow key={row.id}>
-                                    <TableCell component="th" scope="row">{row.name}</TableCell>
-                                    <TableCell align="right">{row.number}</TableCell>
-                                    <TableCell align="right">{row.incomingCallCount}</TableCell>
-                                    <TableCell align="right">{row.location}</TableCell>
-                                    <TableCell align="right">{row.outGoingCallCount}</TableCell>
-                                    <TableCell align="right">{row.createdDate}</TableCell>
-                                    <TableCell align="right">
-                                        <IconButton style={{ padding: 8 }} onClick={this.handleMenuOpen}>
-                                            <MoreHorizIcon ></MoreHorizIcon>
-                                        </IconButton>
-                                        <Dialog
-                                            open={open} onClose={this.handleDialogClose}
-                                            aria-labelledby="form-dialog-title">
-                                            <DialogTitle id="form-dialog-title">Update</DialogTitle>
-                                            <DialogContent>
-                                                <DialogContentText>
-                                                    Please fill out</DialogContentText>
-                                                <form>
-                                                    <TextField autoFocus margin="dense" id="name" label="Name" type="text" fullWidth />
-                                                    <TextField autoFocus margin="dense" id="name" label="Number" type="text" fullWidth />
-                                                    <TextField autoFocus margin="dense" id="name" label="Incoming call count" type="text" fullWidth />
-                                                    <TextField autoFocus margin="dense" id="name" label="Outgoing call count" type="text" fullWidth />
-                                                    <TextField autoFocus margin="dense" id="name" label="Location" type="text" fullWidth />
-                                                    <TextField autoFocus margin="dense" id="name" type="date" fullWidth />
-                                                </form>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button onClick={this.handleDialogOpen} color="primary">Cancel</Button>
-                                                <Button onClick={this.handleUpdateContact} color="primary">Update</Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                        <Dialog
-                                            open={deleteDialog} onClose={this.handleDialogClose}
-                                            aria-labelledby="form-dialog-title">
-                                            <DialogTitle id="form-dialog-title">Are you sure?</DialogTitle>
-                                            <DialogActions>
-                                                <Button onClick={this.handleDeleteDialogToggle} color="primary">Cancel</Button>
-                                                <Button onClick={this.handleDeleteContact} color="primary">Delete</Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                        <Menu
-                                            anchorEl={this.state.anchorEl}
-                                            id={row.id}
-                                            open={Boolean(this.state.anchorEl)}
-                                            onClose={this.handleMenuClose}
-                                        >
-                                            <MenuItem onClick={(e) => { this.handleDialogOpen(e, row) }}>Update</MenuItem>
-                                            <MenuItem onClick={this.handleDeleteDialogToggle}>Delete</MenuItem>
-                                        </Menu>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                            }
+                            {/* {this.state.data.map((row) => (
+                                
+                            ))} */}
                         </TableBody>
                     </Table>
                 </TableContainer>
@@ -234,28 +138,217 @@ class Contacts extends React.Component {
 }
 
 
-// class ContactRow extends React.Component {
-//     state = {
-//         anchorEl: null,
-//     };
+class ContactRow extends React.Component {
 
-//     handleSettingsClick = event => {
-//         this.setState({ anchorEl: event.currentTarget });
-//     };
+    constructor(props) {
+        super(props)
 
-//     handleSettingsClose = () => {
-//         this.setState({ anchorEl: null });
-//     };
+        this.nameRef = React.createRef()
+        this.numRef = React.createRef()
+        this.incomingRef = React.createRef()
+        this.outgoingRef = React.createRef()
+        this.locationRef = React.createRef()
+        this.dateRef = React.createRef()
 
-//     render() {
-//         const { anchorEl } = this.state;
-//         const { product, classes, handleOpen } = this.props;
-//         console.log(product);
+        this.state = {
+            data: [],
+            originalData: [],
+            open: false,
+            openDialog: false,
+            isMenuOpen: false,
+            anchorEl: null,
+            deleteDialog: false,
+            name: '',
+            number: '',
+            incomingcc: '',
+            outgoingcc: '',
+            location: '',
+            createdDate: '',
+            toggleAlert: false
+        }
+    }
 
-//         return (
-  
-//       );
-//     }
-// }
+    handleDialogClose = () => {
+        this.setState({
+            open: false
+        })
+    };
+
+    handleDialogOpen = (event, row) => {
+        console.log(row)
+        console.log(row.createdDate)
+        this.setState({
+            open: !this.state.open,
+            name: row.name,
+            number: row.number,
+            incomingcc: row.incomingCallCount,
+            outgoingcc: row.outGoingCallCount,
+            location: row.location,
+            createdDate: row.createdDate,
+        })
+    };
+
+    handleDeleteDialogToggle = (event, row) => {
+        console.log(row)
+        this.setState({
+            deleteDialog: !this.state.deleteDialog
+        })
+    };
+
+    handleMenuOpen = (event) => {
+        console.log(event)
+        console.log(this.state.isMenuOpen)
+        this.setState({
+            anchorEl: event.currentTarget,
+            isMenuOpen: !this.state.isMenuOpen
+        })
+    };
+
+    handleMenuClose = (event, row) => {
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen,
+            anchorEl: null
+        })
+    };
+
+    handleUpdateContact = (event, row) => {
+
+        let reqData = {
+            id: row.id,
+            name: this.nameRef.current.value,
+            createdDate: this.dateRef.current.value,
+            number: this.numRef.current.value,
+            incomingCallCount: this.incomingRef.current.value,
+            outGoingCallCount: this.outgoingRef.current.value,
+            location: this.locationRef.current.value,
+        }
+        console.log(reqData)
+        var url = config.server.protocol + config.server.serverUrl + config.server.contextpath + '/updatecontact';
+        axios.put(url, reqData)
+            .then(result => {
+                console.log(result.data.message)
+                var url = config.server.protocol + config.server.serverUrl + config.server.contextpath + '/fetchallcontacts';
+                console.log(url)
+                axios.get(url)
+                    .then(res => {
+                        this.props.updateAndGetData(res.data.data)
+                        this.setState({
+                            toggleAlert: !this.state.toggleAlert
+                        })
+                    })
+            })
+        this.setState({
+            isMenuOpen: !this.state.isMenuOpen,
+            anchorEl: null,
+            open: false
+        })
+        // window.location.href = '/';
+    };
+
+    handleDeleteContact = (event, row) => {
+        var url = config.server.protocol + config.server.serverUrl + config.server.contextpath + '/deletecontactbyid/' + row.id;
+        console.log(url)
+        axios.delete(url).then(result => {
+            // res = result.data.apiResults
+            console.log(result.data)
+        })
+        this.setState({
+            deleteDialog: false,
+            anchorEl: null
+        })
+        window.location.href = '/';
+    };
+
+    modifyDate = (event) => {
+        console.log(event.target.value)
+        console.log(event.target.type)
+        console.log(event.target.name)
+        if (event.target.name === 'date') {
+            this.setState({
+                createdDate: event.target.value
+            })
+        }
+    }
+
+    handleCloseAlert = () => {
+        this.setState({
+            toggleAlert: !this.state.toggleAlert
+        })
+    }
+
+
+    render() {
+        const { anchorEl } = this.state;
+        const { row, classes, handleOpen, updateAndGetData } = this.props;
+        const { open, isMenuOpen, deleteDialog, toggleAlert } = this.state
+
+        return (
+            <TableRow key={row.id}>
+                <TableCell component="th" scope="row">{row.name}</TableCell>
+                <TableCell align="right">{row.number}</TableCell>
+                <TableCell align="right">{row.incomingCallCount}</TableCell>
+                <TableCell align="right">{row.location}</TableCell>
+                <TableCell align="right">{row.outGoingCallCount}</TableCell>
+                <TableCell align="right">{row.createdDate}</TableCell>
+                <TableCell align="right">
+                    <IconButton style={{ padding: 8 }} onClick={this.handleMenuOpen}>
+                        <MoreHorizIcon ></MoreHorizIcon>
+                    </IconButton>
+                    <Dialog
+                        open={open} onClose={this.handleDialogClose}
+                        aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Update</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>
+                                Please fill out</DialogContentText>
+                            <form>
+                                <TextField autoFocus margin="dense" id="name" defaultValue={this.state.name} inputRef={this.nameRef} label="Name" type="text" fullWidth />
+                                <TextField margin="dense" id="number" defaultValue={this.state.number} inputRef={this.numRef} label="Number" type="text" fullWidth />
+                                <TextField margin="dense" id="incoming" defaultValue={this.state.incomingcc} inputRef={this.incomingRef} label="Incoming call count" type="text" fullWidth />
+                                <TextField margin="dense" id="outgoing" defaultValue={this.state.outgoingcc} inputRef={this.outgoingRef} label="Outgoing call count" type="text" fullWidth />
+                                <TextField margin="dense" id="location" defaultValue={this.state.location} inputRef={this.locationRef} label="Location" type="text" fullWidth />
+                                <TextField margin="dense" id="date" name="date" value={this.state.createdDate} inputRef={this.dateRef} type="date" fullWidth onChange={this.modifyDate} />
+                            </form>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button onClick={this.handleDialogClose} color="primary">Cancel</Button>
+                            <Button onClick={(e) => (this.handleUpdateContact(e, row))} color="primary">Update</Button>
+                        </DialogActions>
+                    </Dialog>
+                    <Dialog
+                        open={deleteDialog} onClose={this.handleDialogClose}
+                        aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Are you sure?</DialogTitle>
+                        <DialogActions>
+                            <Button onClick={this.handleDeleteDialogToggle} color="primary">Cancel</Button>
+                            <Button onClick={(e) => { this.handleDeleteContact(e, row) }} color="primary">Delete</Button>
+                        </DialogActions>
+                    </Dialog>
+                    <Menu
+                        anchorEl={this.state.anchorEl}
+                        id={row.id}
+                        open={Boolean(this.state.anchorEl)}
+                        onClose={this.handleMenuClose}
+                    >
+                        <MenuItem onClick={(e) => { this.handleDialogOpen(e, row) }}>Update</MenuItem>
+                        <MenuItem onClick={(e) => { this.handleDeleteDialogToggle(e, row) }}>Delete</MenuItem>
+                    </Menu>
+                    <div>
+                        <Snackbar
+                            anchorOrigin={{
+                                vertical: 'bottom',
+                                horizontal: 'left',
+                            }}
+                            open={toggleAlert}
+                            autoHideDuration={6000}
+                            onClose={this.handleCloseAlert}
+                            message="Contact updated"
+                        />
+                    </div>
+                </TableCell>
+            </TableRow>
+        );
+    }
+}
 
 export default Contacts

@@ -15,6 +15,8 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
+import Button from '@material-ui/core/Button';
+import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles((theme) => ({
     grow: {
@@ -184,7 +186,13 @@ export default function PrimarySearchAppBar() {
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new add" style={{ color: "grey" }} href={'/createcontact'}>
                             {/* <Badge badgeContent={4} color="primary"> */}
-                            <AddIcon /> Add
+                            {/* <AddIcon /> Add */}
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                className={classes.button}
+                                endIcon={<AddIcon />}
+                            >Add</Button>
                             {/* </Badge> */}
                         </IconButton>
                         <IconButton aria-label="show 17 new notifications" color="inherit">

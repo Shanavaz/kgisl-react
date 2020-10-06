@@ -4,9 +4,9 @@ require('dotenv');
 const configDev = {
     server: {
         url: 'localhost',
-        port: ':4002',
+        port: ':3001',
         contextpath: '',
-        serverUrl: '192.168.31.172:3001',
+        serverUrl: 'localhost:3001',
         protocol: 'http://'
     }
 };

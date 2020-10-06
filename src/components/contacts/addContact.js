@@ -54,6 +54,8 @@ class CreateContact extends React.Component {
                     this.setState({
                         toggleAlert: !this.state.toggleAlert
                     })
+                    window.location.href = '/';
+
                 }
             })
 
@@ -94,12 +96,6 @@ class CreateContact extends React.Component {
                     <div style={{ marginTop: '5px' }}>
                         <Button variant="contained" color="primary" onClick={this.handleSubmit}>
                             Submit</Button>
-                        {/* <button type="submit" onClick={this.handleSubmit}>
-                        Submit
-                </button>
-                    <button type="button" >
-                        Clear Values
-                </button> */}
                     </div>
                 </form>
                 <div>
@@ -112,13 +108,6 @@ class CreateContact extends React.Component {
                         autoHideDuration={6000}
                         onClose={this.handleCloseAlert}
                         message="Contact created"
-                        // action={
-                        //     <React.Fragment>
-                        //         <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleCloseAlert}>
-                        //             <CloseIcon fontSize="small" />
-                        //         </IconButton>
-                        //     </React.Fragment>
-                        // }
                     />
                 </div>
             </center>

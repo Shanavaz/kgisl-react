@@ -27,6 +27,7 @@ import NavItem from './NavItem';
 import Header from '../Header'
 import Footer from '../Footer'
 import Container from '@material-ui/core/Container';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
 
 const items = [
@@ -46,14 +47,14 @@ const items = [
         title: 'Contacts'
     },
     {
+        href: '/createcontact',
+        icon: AddCircleOutlineIcon,
+        title: 'Files'
+    },
+    {
         href: '/forum',
         icon: ForumIcon,
         title: 'Forum'
-    },
-    {
-        href: '/createcontact',
-        icon: FileCopyIcon,
-        title: 'Files'
     },
     {
         href: '/calendar',
