@@ -115,7 +115,6 @@ export default function PrimarySearchAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
         </Menu>
     );
@@ -131,15 +130,6 @@ export default function PrimarySearchAppBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <AddIcon />
-            <MenuItem>
-                <IconButton aria-label="show 11 new notifications" color="inherit">
-                    <Badge badgeContent={11} color="secondary">
-                        <NotificationsIcon />
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
-            </MenuItem>
             <MenuItem onClick={handleProfileMenuOpen}>
                 <IconButton
                     aria-label="account of current user"
@@ -191,9 +181,6 @@ export default function PrimarySearchAppBar() {
                                 endIcon={<AddIcon />}
                             >Add</Button>
                             {/* </Badge> */}
-                        </IconButton>
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <NotificationsIcon />
                         </IconButton>
                         <IconButton
                             edge="end"
