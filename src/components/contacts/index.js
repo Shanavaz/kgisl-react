@@ -1,5 +1,4 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,10 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import config from '../../config/config'
 import axios from 'axios'
 import generateData from './generateData';
-import MenuIcon from '@material-ui/icons/Menu';
 import IconButton from '@material-ui/core/IconButton';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import Modal from '@material-ui/core/Modal';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -90,16 +87,13 @@ class Contacts extends React.Component {
 
     render() {
 
-
-        const { open, isMenuOpen, deleteDialog } = this.state
-
-
         return (
             <React.Fragment>
+                <h1 style = {{marginTop:'0px'}}>Contacts</h1>
                 <div>
                     Search
                     <input type='text' style={{ marginBottom: '10px', padding: '7px', margin: '10px' }}
-                        onKeyUp={this.searchName} />
+                        onKeyUp={this.searchName} label='Name'/>
                 </div>
                 <TableContainer component={Paper}>
                     <Table aria-label="customized table">
@@ -278,9 +272,8 @@ class ContactRow extends React.Component {
 
 
     render() {
-        const { anchorEl } = this.state;
-        const { row, classes, handleOpen, updateAndGetData } = this.props;
-        const { open, isMenuOpen, deleteDialog, toggleAlert } = this.state
+        const { row } = this.props;
+        const { open, deleteDialog, toggleAlert } = this.state
 
         return (
             <TableRow key={row.id}>

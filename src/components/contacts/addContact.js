@@ -82,7 +82,7 @@ class CreateContact extends React.Component {
         const { toggleAlert } = this.state
         return (
             <center>
-                <h1>Create a contact</h1>
+                <h1 style = {{marginTop:'0px'}}>Create a contact</h1>
                 {this.state.toggleAlert ?
                     <Alert severity="success">Contact created!!</Alert> :
                     <p></p>}
