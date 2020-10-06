@@ -58,7 +58,7 @@ const NavItem = ({
       <Button
         activeClassName={classes.active}
         className={classes.button}
-        to={href}
+        href={href}
       >
         {Icon && (
           <Icon

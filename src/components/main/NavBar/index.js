@@ -13,60 +13,73 @@ import {
     makeStyles
 } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import ForumIcon from '@material-ui/icons/Forum';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import AlarmOnIcon from '@material-ui/icons/AlarmOn';
+import SettingsIcon from '@material-ui/icons/Settings';
+import RestoreIcon from '@material-ui/icons/Restore';
+import PieChartIcon from '@material-ui/icons/PieChart';
+import ViewModuleIcon from '@material-ui/icons/ViewModule';
+import MenuIcon from '@material-ui/icons/Menu';
 import NavItem from './NavItem';
-// import {
-//     AlertCircle as AlertCircleIcon,
-//     BarChart as BarChartIcon,
-//     Lock as LockIcon,
-//     Settings as SettingsIcon,
-//     ShoppingBag as ShoppingBagIcon,
-//     User as UserIcon,
-//     UserPlus as UserPlusIcon,
-//     Users as UsersIcon
-// } from 'react-feather';
+import Header from '../Header'
+import Footer from '../Footer'
+import Container from '@material-ui/core/Container';
 
 
 const items = [
     {
-        href: '/app/dashboard',
+        href: '/app/home',
+        icon: ViewModuleIcon,
+        title: 'Home'
+    },
+    {
+        href: '/app/home',
         icon: HomeIcon,
-        title: 'Dashboard'
+        title: 'Home'
+    },
+    {
+        href: '/contacts',
+        icon: SupervisorAccountIcon,
+        title: 'Contacts'
+    },
+    {
+        href: '/app/products',
+        icon: ForumIcon,
+        title: 'Forum'
+    },
+    {
+        href: '/app/account',
+        icon: FileCopyIcon,
+        title: 'Files'
+    },
+    {
+        href: '/app/settings',
+        icon: CalendarTodayIcon,
+        title: 'Calendar'
+    },
+    {
+        href: '/login',
+        icon: AlarmOnIcon,
+        title: 'Alarm'
+    },
+    {
+        href: '/register',
+        icon: SettingsIcon,
+        title: 'Settings'
+    },
+    {
+        href: '/404',
+        icon: RestoreIcon,
+        title: 'Restore'
+    },
+    {
+        href: '/404',
+        icon: PieChartIcon,
+        title: 'Charts'
     }
-    // {
-    //     href: '/app/customers',
-    //     icon: UsersIcon,
-    //     title: 'Customers'
-    // },
-    // {
-    //     href: '/app/products',
-    //     icon: ShoppingBagIcon,
-    //     title: 'Products'
-    // },
-    // {
-    //     href: '/app/account',
-    //     icon: UserIcon,
-    //     title: 'Account'
-    // },
-    // {
-    //     href: '/app/settings',
-    //     icon: SettingsIcon,
-    //     title: 'Settings'
-    // },
-    // {
-    //     href: '/login',
-    //     icon: LockIcon,
-    //     title: 'Login'
-    // },
-    // {
-    //     href: '/register',
-    //     icon: UserPlusIcon,
-    //     title: 'Register'
-    // },
-    // {
-    //     href: '/404',
-    //     icon: AlertCircleIcon,
-    //     title: 'Error'
-    // }
 ];
 
 const useStyles = makeStyles(() => ({
@@ -97,7 +110,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     // }, [location.pathname]);
 
     const content = (
-
         <Box p={2}>
             <List>
                 {items.map((item) => (
@@ -109,32 +121,33 @@ const NavBar = ({ onMobileClose, openMobile }) => {
                 ))}
             </List>
         </Box>
-
     );
+
+    const [open, setOpen] = React.useState(false);
 
     return (
         <React.Fragment>
-            <Hidden lgUp>
-                <Drawer
-                    anchor="left"
-                    // classes={{ paper: classes.mobileDrawer }}
-                    onClose={onMobileClose}
-                    open={openMobile}
-                    variant="temporary"
-                >
-                    {content}
-                </Drawer>
-            </Hidden>
-            <Hidden mdDown>
-                <Drawer
-                    anchor="left"
-                    // classes={{ paper: classes.desktopDrawer }}
-                    open
+            <Header />
+            <Container maxWidth="lg" style={{ backgroundColor: '#f4f8f9' }}>
+                <Hidden mdDown>
+                    <Drawer
+                        anchor="left"
+                        // classes={{ paper: classes.desktopDrawer }}
+                        open
+                        variant="persistent"
+                    >
+                        {content}
+                    </Drawer>
+                    {/* <Drawer
                     variant="persistent"
+                    anchor="left"
+                    open={open}
                 >
                     {content}
-                </Drawer>
-            </Hidden>
+                </Drawer> */}
+                </Hidden>
+                {/* <Footer /> */}
+            </Container>
         </React.Fragment>
     );
 };
@@ -144,9 +157,9 @@ NavBar.propTypes = {
     openMobile: PropTypes.bool
 };
 
-NavBar.defaultProps = {
-    onMobileClose: () => { },
-    openMobile: false
-};
+// NavBar.defaultProps = {
+//     onMobileClose: () => { },
+//     openMobile: false
+// };
 
 export default NavBar;
