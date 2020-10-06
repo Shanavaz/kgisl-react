@@ -182,7 +182,7 @@ export default function PrimarySearchAppBar() {
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 4 new add" style={{ color: "grey" }}>
+                        <IconButton aria-label="show 4 new add" style={{ color: "grey" }} href={'/createcontact'}>
                             {/* <Badge badgeContent={4} color="primary"> */}
                             <AddIcon /> Add
                             {/* </Badge> */}

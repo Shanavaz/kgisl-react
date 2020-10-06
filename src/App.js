@@ -13,6 +13,7 @@ import Header from './components/main/Header'
 import Paper from '@material-ui/core/Paper';
 import Contacts from './components/contacts'
 import Container from '@material-ui/core/Container';
+import CreateContact from './components/contacts/addContact';
 
 class App extends React.Component {
 
@@ -62,29 +63,30 @@ class App extends React.Component {
         <Nav />
         {/* <Paper elevation={2} variant={'elevation'} style={{ background: '#f4f8f9' }} > */}
 
-        {this.state.isLoggedIn === true ?
-          <Container maxWidth="lg" style={{ backgroundColor: '#f4f8f9' }}>
+        {/* {this.state.isLoggedIn === true ? */}
+          <Container maxWidth="lg" style={{ backgroundColor: '#f4f8f9', height: '90vh',width: '92vw', marginLeft: '96px' }}>
             <Router>
               {/* {this.state.pathName === '/' ? null :
                 <Header></Header>
               } */}
               <Switch>
                 <Route path="/contacts" children={<Contacts />} />
+                <Route path="/createcontact" children={<CreateContact />} />
                 <Route exact path="/" component={Contacts} />
               </Switch>
             </Router>
           </Container>
-          :
-          <Router>
+          {/* : */}
+          {/* <Router> */}
             {/* {this.state.pathName == '/' ? null :
               <Header name="Power Electricals"></Header>
             } */}
             {/* <Header name="Power Electricals">
             </Header> */}
-            <Route path="/" children={<Contacts />} />
-            <Redirect to='/' />
-          </Router>
-        }
+            {/* <Route path="/" children={<Contacts />} /> */}
+            {/* <Redirect to='/' /> */}
+          {/* </Router> */}
+        {/* } */}
         {/* </Paper > */}
 
       </React.Fragment>

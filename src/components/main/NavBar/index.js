@@ -31,12 +31,12 @@ import Container from '@material-ui/core/Container';
 
 const items = [
     {
-        href: '/app/home',
+        href: '/',
         icon: ViewModuleIcon,
-        title: 'Home'
+        title: 'View'
     },
     {
-        href: '/app/home',
+        href: '/',
         icon: HomeIcon,
         title: 'Home'
     },
@@ -46,37 +46,37 @@ const items = [
         title: 'Contacts'
     },
     {
-        href: '/app/products',
+        href: '/forum',
         icon: ForumIcon,
         title: 'Forum'
     },
     {
-        href: '/app/account',
+        href: '/createcontact',
         icon: FileCopyIcon,
         title: 'Files'
     },
     {
-        href: '/app/settings',
+        href: '/calendar',
         icon: CalendarTodayIcon,
         title: 'Calendar'
     },
     {
-        href: '/login',
+        href: '/alarm',
         icon: AlarmOnIcon,
         title: 'Alarm'
     },
     {
-        href: '/register',
+        href: '/settings',
         icon: SettingsIcon,
         title: 'Settings'
     },
     {
-        href: '/404',
+        href: '/restore',
         icon: RestoreIcon,
         title: 'Restore'
     },
     {
-        href: '/404',
+        href: '/charts',
         icon: PieChartIcon,
         title: 'Charts'
     }
@@ -128,26 +128,18 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     return (
         <React.Fragment>
             <Header />
-            <Container maxWidth="lg" style={{ backgroundColor: '#f4f8f9' }}>
+            {/* <Container maxWidth="lg" style={{ backgroundColor: '#f4f8f9', height: '100vh', width: '100vh', margin: '0px' }}> */}
                 <Hidden mdDown>
                     <Drawer
                         anchor="left"
-                        // classes={{ paper: classes.desktopDrawer }}
                         open
                         variant="persistent"
                     >
                         {content}
                     </Drawer>
-                    {/* <Drawer
-                    variant="persistent"
-                    anchor="left"
-                    open={open}
-                >
-                    {content}
-                </Drawer> */}
                 </Hidden>
                 {/* <Footer /> */}
-            </Container>
+            {/* </Container> */}
         </React.Fragment>
     );
 };
